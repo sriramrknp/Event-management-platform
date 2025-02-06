@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
 import { getEvents } from '../services/eventService';
 import { useAuth } from '../contexts/AuthContext';
-import {   } from '../services/Socket';
+import { socket  } from '../services/Socket';
 
 export default function Dashboard() {
   const [events, setEvents] = useState([]);

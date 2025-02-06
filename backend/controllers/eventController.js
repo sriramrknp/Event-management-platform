@@ -39,11 +39,20 @@ exports.getEvents = async (req, res) => {
 // Get event by ID
 exports.getEventById = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id).populate('attendees', 'name email');
-    if (!event) throw new Error('Event not found');
+    const event = await Event.findById(req.params.id)
+      .populate('attendees', 'name email')
+      .populate('createdBy', 'name');
+
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+    
     res.json(event);
   } catch (err) {
-    res.status(404).json({ message: err.message });
+    if (err.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid event ID format' });
+    }
+    res.status(500).json({ message: 'Server error' });
   }
 };
 

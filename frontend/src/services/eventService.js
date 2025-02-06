@@ -25,8 +25,13 @@ export const createEvent = async (eventData) => {
 };
 
 export const getEventById = async (id) => {
-  const response = await API.get(`/${id}`);
-  return response.data;
+  try {
+    const response = await API.get(`/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching event:', error);
+    throw error;
+  }
 };
 
 export const rsvpToEvent = async (id) => {

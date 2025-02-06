@@ -15,7 +15,7 @@ export default function EventCard({ event, isGuest }) {
       <p>Attendees: {event.attendees.length}</p>
       <div className="event-actions">
         {!isGuest && <button onClick={handleRSVP}>RSVP</button>}
-        <Link to={`/events/${event.id}`}>View Details</Link>
+        <Link to={`/events/${event._id}`}>View Details</Link>
       </div>
     </div>
   );

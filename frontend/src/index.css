@@ -57,3 +57,26 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Add to index.css */
+.error {
+  color: #dc3545;
+  padding: 20px;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  margin: 20px;
+}
+
+.attendees-list {
+  margin-top: 20px;
+}
+
+.attendees-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.attendees-list li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
