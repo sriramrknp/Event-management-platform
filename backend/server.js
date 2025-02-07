@@ -20,7 +20,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       'https://event-management-platform-sriram-reddys-projects.vercel.app', // Frontend URL
-      'http://localhost:3000', // Local development
+      'https://eventmanageplt-sriram-reddys-projects.vercel.app'
     ],
     methods: ['GET', 'POST'],
     credentials: true,
@@ -28,14 +28,27 @@ const io = new Server(server, {
 });
 
 // Enable CORS for all routes
+const allowedOrigins = [
+  'https://event-management-platform-sriram-reddys-projects.vercel.app', // if this is also used
+  'https://eventmanageplt-sriram-reddys-projects.vercel.app', // add the exact deployed frontend URL
+  'http://localhost:3000'
+];
+
 app.use(
   cors({
-    origin: [
-      'https://event-management-platform-sriram-reddys-projects.vercel.app'
-    ],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   })
 );
+
 
 app.use(express.json());
 
