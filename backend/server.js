@@ -18,18 +18,24 @@ const server = http.createServer(app);
 // Enhanced CORS configuration
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Explicitly allow frontend origin
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
-  }
+    origin: [
+      'https://event-management-platform-sriram-reddys-projects.vercel.app', // Frontend URL
+      'http://localhost:3000', // Local development
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
 });
 
-// Express CORS middleware
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+// Enable CORS for all routes
+app.use(
+  cors({
+    origin: [
+      'https://event-management-platform-sriram-reddys-projects.vercel.app'
+    ],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
