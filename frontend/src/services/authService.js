@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:5001/api/auth' });
+const baseUrl = process.env.REACT_APP_BACKEND_URL; // Fallback for local development
+const API = axios.create({ baseURL: `${baseUrl}/api/auth` });
 
 export const login = async (credentials) => {
+  console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
   const response = await API.post('/login', credentials);
   return response.data;
 };

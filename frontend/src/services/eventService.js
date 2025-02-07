@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:5001/api/events' });
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
+const API = axios.create({ baseURL: `${baseUrl}/api/events` });
 
 // Add JWT to requests
 API.interceptors.request.use((config) => {
