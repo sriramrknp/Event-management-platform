@@ -7,6 +7,8 @@ const eventRoutes = require('./routes/eventRoutes');
 const { Server } = require('socket.io');
 const http = require('http');
 
+require('dotenv').config();
+
 dotenv.config();
 connectDB();
 
