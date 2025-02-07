@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
 import { getEvents } from '../services/eventService';
 import { useAuth } from '../contexts/AuthContext';
-import { socket } from '../services/Socket';
+import { Socket } from '../services/Socket';
 
 export default function Dashboard() {
   const [events, setEvents] = useState([]);
@@ -28,14 +28,14 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    socket.on('attendeeUpdate', (updatedEvent) => {
+    Socket.on('attendeeUpdate', (updatedEvent) => {
       setEvents(prev =>
         prev.map(event =>
           event._id === updatedEvent._id ? updatedEvent : event
         )
       );
     });
-    return () => socket.off('attendeeUpdate');
+    return () => Socket.off('attendeeUpdate');
   }, []);
 
   // Apply status filter (upcoming, past, or all)
