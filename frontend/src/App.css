@@ -64,7 +64,7 @@ h1 {
 }
 
 .navbar a {
-    color: white;
+    color: rgb(226, 0, 0);
     text-decoration: none;
     margin: 0 15px;
 }
@@ -87,5 +87,16 @@ h1 {
 .welcome-message {
   margin-right: 15px;
   font-weight: bold;
-  color: #fff;
+  color: #ff0303;
+}
+
+/* Add this to your CSS file */
+.nav-link {
+  color: red; /* Set the text color */
+  font-size: 15px; /* Set the font size */
+  text-decoration: none; /* Remove underline */
+}
+
+.nav-link:hover {
+  text-decoration: underline; /* Optional: Add underline on hover */
 }

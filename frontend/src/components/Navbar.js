@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import "../App.css"
 
 export default function Navbar() {
 
@@ -27,13 +28,13 @@ export default function Navbar() {
               <span className="welcome-message" style={{ color: 'red', fontSize: '15px' }}>
                 Hi, {user.role === 'guest' ? 'Guest' : user.name}
               </span>
-              <Link to="/create-event" style={{ color: 'red', fontSize: '15px' }} >Create Event</Link>
+              <Link to="/create-event" className="nav-link">Create Event</Link>
               <button onClick={logout}>Logout</button>
             </>
           ) : (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/register" className="nav-link">Register</Link>
               <button onClick={handleGuestLogin}>Guest Login</button>
             </>
           )}
