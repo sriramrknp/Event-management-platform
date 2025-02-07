@@ -72,3 +72,20 @@ h1 {
 .navbar a:hover {
     text-decoration: underline;
 }
+
+/* Add this to your App.css */
+.welcome-container {
+  text-align: center; /* Center the text */
+  margin-top: 20px; /* Add some space above */
+  padding: 10px; /* Add padding */
+  border: 1px solid #ccc; /* Optional: Add a border */
+  border-radius: 5px; /* Optional: Rounded corners */
+  background-color: #f9f9f9; /* Optional: Light background color */
+}
+
+/* In index.css */
+.welcome-message {
+  margin-right: 15px;
+  font-weight: bold;
+  color: #fff;
+}

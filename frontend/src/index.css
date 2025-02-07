@@ -80,3 +80,16 @@ body {
   padding: 5px 0;
   border-bottom: 1px solid #eee;
 }
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* In index.css */
+.welcome-message {
+  margin-right: 15px;
+  font-weight: bold;
+  color: #fff;
+}

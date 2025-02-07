@@ -10,30 +10,36 @@ export default function CreateEvent() {
     location: '',
     category: 'general',
   });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await createEvent(formData);
       navigate('/');
     } catch (error) {
       alert('Error creating event. Please try again.');
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="event-form">
       <h2>Create New Event</h2>
+      {loading && <div>Creating event...</div>}
       <form onSubmit={handleSubmit}>
         <select
-            value={formData.category}
-            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-          >
-            <option value="general">General</option>
-            <option value="conference">Conference</option>
-            <option value="workshop">Workshop</option>
-            <option value="social">Social</option>
+          value={formData.category}
+          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+        >
+          <option value="general">General</option>
+          <option value="conference">Conference</option>
+          <option value="workshop">Workshop</option>
+          <option value="social">Social</option>
         </select>
         <input
           type="text"
@@ -70,7 +76,9 @@ export default function CreateEvent() {
           <option value="workshop">Workshop</option>
           <option value="social">Social</option>
         </select>
-        <button type="submit">Create Event</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Creating..." : "Create Event"}
+        </button>
       </form>
     </div>
   );

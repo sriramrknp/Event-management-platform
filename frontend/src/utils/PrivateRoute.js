@@ -9,6 +9,6 @@ export default function PrivateRoute() {
   // Optionally render a loading indicator while checking auth status
   if (loading) return <div>Loading...</div>;
 
-  console.log("PrivateRoute Debug:", { user, token });
+  // console.log("PrivateRoute Debug:", { user, token });
   return user && token ? <Outlet /> : <Navigate to="/login" />;
 }

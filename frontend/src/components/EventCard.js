@@ -1,10 +1,19 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { rsvpToEvent } from '../services/eventService';
 
 export default function EventCard({ event, isGuest }) {
 
+  const [error, setError] = useState('');
+
   const handleRSVP = async () => {
-    await rsvpToEvent(event._id);
+    try {
+      setError('');
+      await rsvpToEvent(event._id);
+      // You might want to update local state here if needed
+    } catch (err) {
+      setError(err.response?.data?.message || 'RSVP failed');
+    }
   };
 
   return (
@@ -14,9 +23,15 @@ export default function EventCard({ event, isGuest }) {
       <p>{event.location}</p>
       <p>Attendees: {event.attendees.length}</p>
       <div className="event-actions">
-        {!isGuest && <button onClick={handleRSVP}>RSVP</button>}
+        {!isGuest && (
+          <>
+            <button onClick={handleRSVP}>RSVP</button>
+            {error && <div className="error-message">{error}</div>}
+          </>
+        )}
         <Link to={`/events/${event._id}`}>View Details</Link>
       </div>
+
     </div>
   );
 }

@@ -60,12 +60,22 @@ exports.getEventById = async (req, res) => {
 exports.rsvpToEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
-    if (!event) throw new Error('Event not found');
-    if (event.attendees.includes(req.user.id)) throw new Error('Already RSVPed');
-    event.attendees.push(req.user.id);
-    await event.save();
-    res.json(event);
+    if (!event) return res.status(404).json({ message: 'Event not found' });
+    
+    const userId = req.user.id.toString();
+    if (event.attendees.includes(userId)) {
+      return res.status(400).json({ message: 'Already RSVPed' });
+    }
+
+    event.attendees.push(userId);
+    const updatedEvent = await event.save();
+    
+    // Emit update through Socket.IO
+    req.app.get('socketio').emit('eventUpdate', updatedEvent);
+    
+    res.json(updatedEvent);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    console.error('RSVP Error:', err);
+    res.status(500).json({ message: 'Server error' });
   }
 };

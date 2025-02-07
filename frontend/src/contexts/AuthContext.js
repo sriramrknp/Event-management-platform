@@ -30,12 +30,19 @@ export function AuthProvider({ children }) {
     setUser(user);
   };
 
-  const guestLogin = async () => {
+  // In guestLogin function
+const guestLogin = async () => {
+  try {
     const { token, user } = await apiGuestLogin();
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
     setUser(user);
-  };
+    return true; // Add return value
+  } catch (error) {
+    console.error('Guest login failed:', error);
+    return false;
+  }
+};
 
   const logout = () => {
     setUser(null);
