@@ -7,30 +7,28 @@ const eventRoutes = require('./routes/eventRoutes');
 const { Server } = require('socket.io');
 const http = require('http');
 
-require('dotenv').config();
-
 dotenv.config();
 connectDB();
 
 const app = express();
 const server = http.createServer(app);
 
-// Enhanced CORS configuration
+// Define allowedOrigins BEFORE using it
+const allowedOrigins = [
+  'https://eventmanageplt-sriram-reddys-projects.vercel.app',
+  'https://event-management-platform-ivory.vercel.app'
+];
+
+// Enhanced CORS configuration for Socket.io
 const io = new Server(server, {
   cors: {
-    origin: [
-      'https://eventmanageplt-sriram-reddys-projects.vercel.app'
-    ],
+    origin: allowedOrigins,
     methods: ['GET', 'POST'],
     credentials: true,
   },
 });
 
 // Enable CORS for all routes
-const allowedOrigins = [
-  'https://eventmanageplt-sriram-reddys-projects.vercel.app', // add the exact deployed frontend URL
-];
-
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -45,7 +43,6 @@ app.use(
     credentials: true,
   })
 );
-
 
 app.use(express.json());
 
