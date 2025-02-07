@@ -19,7 +19,6 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: [
-      'https://event-management-platform-sriram-reddys-projects.vercel.app', // Frontend URL
       'https://eventmanageplt-sriram-reddys-projects.vercel.app'
     ],
     methods: ['GET', 'POST'],
@@ -29,9 +28,7 @@ const io = new Server(server, {
 
 // Enable CORS for all routes
 const allowedOrigins = [
-  'https://event-management-platform-sriram-reddys-projects.vercel.app', // if this is also used
   'https://eventmanageplt-sriram-reddys-projects.vercel.app', // add the exact deployed frontend URL
-  'http://localhost:3000'
 ];
 
 app.use(
