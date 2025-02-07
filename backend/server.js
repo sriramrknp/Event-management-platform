@@ -16,7 +16,8 @@ const server = http.createServer(app);
 // Define allowedOrigins BEFORE using it
 const allowedOrigins = [
   'https://eventmanageplt-sriram-reddys-projects.vercel.app',
-  'https://event-management-platform-ivory.vercel.app'
+  'https://event-management-platform-ivory.vercel.app',
+  'https://eventmanageplt-git-main-sriram-reddys-projects.vercel.app/login'
 ];
 
 // Enhanced CORS configuration for Socket.io
